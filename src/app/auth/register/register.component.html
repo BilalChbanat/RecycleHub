@@ -1,0 +1,106 @@
+<div class="h-screen md:flex">
+  <!-- Left Side -->
+  <div class="relative overflow-hidden md:flex w-1/2 bg-gradient-to-tr from-green-700 to-green-300 justify-around items-center hidden">
+    <div>
+      <h1 class="text-white font-bold text-4xl font-sans">GoFinance</h1>
+      <p class="text-white mt-1">The most popular peer-to-peer lending at SEA</p>
+      <a href="#" type="submit" class="flex w-28 text-center justify-center bg-white text-blue-700 mt-4 py-2 rounded-2xl font-bold mb-2">
+        LOGIN
+      </a>
+    </div>
+    <div class="absolute -bottom-32 -left-40 w-80 h-80 border-4 rounded-full border-opacity-30 border-t-8"></div>
+    <div class="absolute -bottom-40 -left-20 w-80 h-80 border-4 rounded-full border-opacity-30 border-t-8"></div>
+    <div class="absolute -top-40 -right-0 w-80 h-80 border-4 rounded-full border-opacity-30 border-t-8"></div>
+    <div class="absolute -top-20 -right-20 w-80 h-80 border-4 rounded-full border-opacity-30 border-t-8"></div>
+  </div>
+
+  <!-- Right Side -->
+  <div class="flex md:w-1/2 justify-center py-10 items-center bg-white">
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="bg-white w-full px-6">
+      <h1 class="text-gray-800 font-bold text-2xl mb-4">Hello Again!</h1>
+      <p class="text-sm font-normal text-gray-600 mb-7">Welcome Back</p>
+
+      <!-- Two-Column Grid -->
+      <div class="grid grid-cols-2 gap-4">
+        <!-- Email Field -->
+        <div>
+          <div class="flex items-center border-2 py-2 px-3 rounded-2xl">
+            <input class="pl-2 outline-none border-none w-full" type="email" formControlName="email" placeholder="Email Address" />
+          </div>
+          <span *ngIf="registerForm.get('email')?.hasError('required') && registerForm.get('email')?.touched" class="text-red-600 text-sm px-1">E-mail is Required</span>
+          <span *ngIf="registerForm.get('email')?.hasError('email') && registerForm.get('email')?.touched" class="text-red-600 text-sm px-1">Please enter a valid email</span>
+        </div>
+
+        <!-- Password Field -->
+        <div>
+          <div class="flex items-center border-2 py-2 px-3 rounded-2xl">
+            <input class="pl-2 outline-none border-none w-full" type="password" formControlName="password" placeholder="Password" />
+          </div>
+          <span *ngIf="registerForm.get('password')?.hasError('required') && registerForm.get('password')?.touched" class="text-red-600 text-sm px-1">Password is Required</span>
+          <span *ngIf="registerForm.get('password')?.hasError('minlength') && registerForm.get('password')?.touched" class="text-red-600 text-sm px-1">Password must be at least 6 characters</span>
+        </div>
+
+        <!-- Confirm Password Field -->
+        <div>
+          <div class="flex items-center border-2 py-2 px-3 rounded-2xl">
+            <input class="pl-2 outline-none border-none w-full" type="password" formControlName="confirmPassword" placeholder="Confirm Password" />
+          </div>
+          <span *ngIf="registerForm.get('confirmPassword')?.hasError('required') && registerForm.get('confirmPassword')?.touched" class="text-red-600 text-sm px-1">Confirm Password is Required</span>
+          <span *ngIf="registerForm.hasError('passwordMismatch') && registerForm.get('confirmPassword')?.touched" class="text-red-600 text-sm px-1">Passwords do not match</span>
+        </div>
+
+        <!-- Username Field -->
+        <div>
+          <div class="flex items-center border-2 py-2 px-3 rounded-2xl">
+            <input class="pl-2 outline-none border-none w-full" type="text" formControlName="username" placeholder="Username" />
+          </div>
+          <span *ngIf="registerForm.get('username')?.hasError('required') && registerForm.get('username')?.touched" class="text-red-600 text-sm px-1">Username is Required</span>
+          <span *ngIf="registerForm.get('username')?.hasError('minlength') && registerForm.get('username')?.touched" class="text-red-600 text-sm px-1">Username must be at least 3 characters</span>
+        </div>
+
+        <!-- Age Field -->
+        <div>
+          <div class="flex items-center border-2 py-2 px-3 rounded-2xl">
+            <input class="pl-2 outline-none border-none w-full" type="number" formControlName="age" placeholder="Age" />
+          </div>
+          <span *ngIf="registerForm.get('age')?.hasError('required') && registerForm.get('age')?.touched" class="text-red-600 text-sm px-1">Age is Required</span>
+          <span *ngIf="registerForm.get('age')?.hasError('min') && registerForm.get('age')?.touched" class="text-red-600 text-sm px-1">You must be at least 18 years old</span>
+        </div>
+
+        <!-- Monthly Income Field -->
+        <div>
+          <div class="flex items-center border-2 py-2 px-3 rounded-2xl">
+            <input class="pl-2 outline-none border-none w-full" type="number" step="0.01" formControlName="monthlyIncome" placeholder="Monthly Income" />
+          </div>
+          <span *ngIf="registerForm.get('monthlyIncome')?.hasError('required') && registerForm.get('monthlyIncome')?.touched" class="text-red-600 text-sm px-1">Monthly Income is Required</span>
+        </div>
+
+        <!-- Credit Score Field -->
+        <div>
+          <div class="flex items-center border-2 py-2 px-3 rounded-2xl">
+            <input class="pl-2 outline-none border-none w-full" type="number" formControlName="creditScore" placeholder="Credit Score" />
+          </div>
+          <span *ngIf="registerForm.get('creditScore')?.hasError('required') && registerForm.get('creditScore')?.touched" class="text-red-600 text-sm px-1">Credit Score is Required</span>
+        </div>
+
+        <!-- Role Field -->
+        <div>
+          <div class="flex items-center border-2 py-2 px-3 rounded-2xl">
+            <select formControlName="role" class="pl-2 outline-none border-none w-full">
+              <option value="">Select Role</option>
+              <option value="admin">Admin</option>
+              <option value="user">User</option>
+              <option value="manager">Manager</option>
+            </select>
+          </div>
+          <span *ngIf="registerForm.get('role')?.hasError('required') && registerForm.get('role')?.touched" class="text-red-600 text-sm px-1">Role is Required</span>
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit" [disabled]="registerForm.invalid" class="block w-2/5 bg-indigo-600 mt-6 py-2 rounded-2xl text-white font-semibold mb-2 disabled:bg-indigo-300">
+        Register
+      </button>
+    </form>
+  </div>
+</div>
