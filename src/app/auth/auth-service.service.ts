@@ -51,6 +51,16 @@ export class AuthServiceService {
     return !!localStorage.getItem('currentUser');
   }
 
+  getAllUsers(): Observable<any[]> {
+    return this.http.get<any[]>(this.apiUrl);
+  }
+
+  updateUser(user: any): Observable<any> {
+    const url = `${this.apiUrl}/${user.id}`;
+    return this.http.put(url, user);
+  }
+
+
   getCurrentUser(): any {
     const user = localStorage.getItem('currentUser');
     return user ? JSON.parse(user) : null;

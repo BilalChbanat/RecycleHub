@@ -1,0 +1,113 @@
+<div class="max-w-4xl mx-auto p-6">
+  <h1 class="text-2xl font-bold text-emerald-600 mb-6">Profil Utilisateur</h1>
+
+  <div class="bg-white p-6 rounded-lg shadow-md">
+    <!-- Profile Photo -->
+    <div class="flex items-center space-x-6 mb-6">
+      <img
+        [src]="currentUser?.photo || 'assets/default-user.png'"
+        alt="Profile Photo"
+        class="h-24 w-24 rounded-full object-cover"
+      />
+      <div>
+        <h2 class="text-xl font-semibold text-gray-800">{{ currentUser?.userName }}</h2>
+        <p class="text-gray-600">{{ currentUser?.email }}</p>
+      </div>
+    </div>
+
+    <!-- Profile Details -->
+    <div *ngIf="!editMode">
+      <div class="space-y-4">
+        <div>
+          <label class="text-gray-600">Adresse:</label>
+          <p class="text-gray-800">{{ currentUser?.address }}</p>
+        </div>
+        <div>
+          <label class="text-gray-600">Téléphone:</label>
+          <p class="text-gray-800">{{ currentUser?.telephone }}</p>
+        </div>
+        <div>
+          <label class="text-gray-600">Date de Naissance:</label>
+          <p class="text-gray-800">{{ currentUser?.DateOfBirth }}</p>
+        </div>
+      </div>
+
+      <div class="mt-6 space-x-4">
+        <button
+          (click)="toggleEditMode()"
+          class="px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700"
+        >
+          Modifier
+        </button>
+        <button
+          (click)="onDelete()"
+          class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700"
+        >
+          Supprimer le Compte
+        </button>
+      </div>
+    </div>
+
+    <!-- Edit Form -->
+    <div *ngIf="editMode">
+      <form (ngSubmit)="onSave()" class="space-y-4">
+        <div>
+          <label class="block text-gray-600">Nom d'utilisateur:</label>
+          <input
+            [(ngModel)]="currentUser.userName"
+            name="userName"
+            class="w-full p-2 border rounded-lg"
+          />
+        </div>
+        <div>
+          <label class="block text-gray-600">E-mail:</label>
+          <input
+            [(ngModel)]="currentUser.email"
+            name="email"
+            class="w-full p-2 border rounded-lg"
+          />
+        </div>
+        <div>
+          <label class="block text-gray-600">Adresse:</label>
+          <input
+            [(ngModel)]="currentUser.address"
+            name="address"
+            class="w-full p-2 border rounded-lg"
+          />
+        </div>
+        <div>
+          <label class="block text-gray-600">Téléphone:</label>
+          <input
+            [(ngModel)]="currentUser.telephone"
+            name="telephone"
+            class="w-full p-2 border rounded-lg"
+          />
+        </div>
+        <div>
+          <label class="block text-gray-600">Date de Naissance:</label>
+          <input
+            [(ngModel)]="currentUser.DateOfBirth"
+            name="DateOfBirth"
+            type="date"
+            class="w-full p-2 border rounded-lg"
+          />
+        </div>
+        <div class="mt-6 space-x-4">
+          <button
+            type="submit"
+            class="px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700"
+          >
+            Enregistrer
+          </button>
+          <button
+            type="button"
+            (click)="toggleEditMode()"
+            class="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700"
+          >
+            Annuler
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

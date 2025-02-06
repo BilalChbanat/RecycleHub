@@ -36,6 +36,6 @@ export class HeaderComponent implements OnInit {
   }
 
   onProfile() {
-    this.router.navigate(['/profile']); // Navigate to profile page
+    this.router.navigate(['/profile']);
   }
 }
