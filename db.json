@@ -1,0 +1,85 @@
+{
+  "users": [
+    {
+      "id": "1a56",
+      "userName": "modide",
+      "email": "kykymifunu@mailinator.com",
+      "address": "Eiusmod incididunt q",
+      "telephone": "+1 (838) 423-9955",
+      "DateOfBirth": "1989-03-21",
+      "password": "Pa$$w0rd!"
+    },
+    {
+      "id": "9962",
+      "userName": "jolapyly",
+      "email": "hawiheweca@mailinator.com",
+      "address": "Et quidem qui magna ",
+      "telephone": "+1 (704) 926-8833",
+      "DateOfBirth": "2015-02-24",
+      "password": "Pa$$w0rd!"
+    },
+    {
+      "id": "ec52",
+      "userName": "gyjaqorac",
+      "email": "gyhigecyju@mailinator.com",
+      "address": "In ut saepe esse qua",
+      "telephone": "+1 (409) 329-9903",
+      "DateOfBirth": "1985-07-13",
+      "password": "Pa$$w0rd!"
+    },
+    {
+      "id": "7bbf",
+      "userName": "rajicazu",
+      "email": "pisyb@mailinator.com",
+      "address": "Ipsum quisquam assu",
+      "telephone": "+1 (234) 969-2205",
+      "DateOfBirth": "1981-06-11",
+      "password": "Pa$$w0rd!"
+    },
+    {
+      "id": "0443",
+      "userName": "jajoha",
+      "email": "gydewuzyt@mailinator.com",
+      "address": "Molestiae et dicta m",
+      "telephone": "+1 (841) 659-6766",
+      "DateOfBirth": "2013-11-05",
+      "password": "Pa$$w0rd!"
+    },
+    {
+      "id": "a4ee",
+      "userName": "nikyhoxys",
+      "email": "daxehu@mailinator.com",
+      "address": "Sapiente quod quo ex",
+      "telephone": "+1 (947) 389-1396",
+      "DateOfBirth": "1970-10-21",
+      "password": "Pa$$w0rd!"
+    },
+    {
+      "id": "010f",
+      "userName": "johacyj",
+      "email": "weza@mailinator.com",
+      "address": "Quo molestiae commod",
+      "telephone": "+1 (327) 199-1657",
+      "DateOfBirth": "2010-07-16",
+      "password": "Pa$$w0rd!"
+    },
+    {
+      "id": "d4e9",
+      "userName": "dataxy",
+      "email": "daraf@mailinator.com",
+      "address": "Eius quas dolores cu",
+      "telephone": "+1 (398) 241-3871",
+      "DateOfBirth": "2005-10-11",
+      "password": "Pa$$w0rd!"
+    },
+    {
+      "id": "bfd9",
+      "userName": "duqyfoz",
+      "email": "kikuhak@mailinator.com",
+      "address": "Sunt quasi est quas",
+      "telephone": "+1 (895) 178-4944",
+      "DateOfBirth": "2012-08-30",
+      "password": "Pa$$w0rd!"
+    }
+  ]
+}
