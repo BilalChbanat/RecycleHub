@@ -1,6 +1,7 @@
 <header class="bg-white shadow-md fixed w-full top-0 z-50">
   <nav class="container mx-auto px-4 py-4">
     <div class="flex items-center justify-between">
+      <!-- Logo -->
       <div class="flex items-center">
         <a href="/" class="text-2xl font-bold text-emerald-600">RecycleHub</a>
       </div>
@@ -12,15 +13,28 @@
       </div>
 
       <div class="flex items-center space-x-4">
-        <button class="px-4 py-2 text-emerald-600 hover:text-emerald-700 transition-colors">
+        <a
+          *ngIf="!authenticated()"
+          href="/login"
+          class="cursor-pointer px-4 py-2 text-emerald-600 hover:text-emerald-700 transition-colors"
+        >
           Se connecter
-        </button>
-        <button class="px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors">
+        </a>
+        <a
+          *ngIf="!authenticated()"
+          href="/register"
+          class="cursor-pointer px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors"
+        >
           S'inscrire
-        </button>
-        <button class="px-4 py-2 text-gray-600 hover:text-gray-700 transition-colors">
+        </a>
+
+        <a
+          *ngIf="authenticated()"
+          (click)="onLogout()"
+          class="cursor-pointer px-4 py-2 text-gray-600 hover:text-gray-700 transition-colors"
+        >
           Déconnexion
-        </button>
+        </a>
       </div>
     </div>
   </nav>
