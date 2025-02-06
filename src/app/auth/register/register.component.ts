@@ -1,20 +1,16 @@
-import {Component, OnInit} from '@angular/core';
-import {FormsModule} from '@angular/forms';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { AuthServiceService } from '../auth-service.service'; // Import AuthService
 
 @Component({
   selector: 'app-register',
+  standalone: true,
+  imports: [CommonModule, FormsModule],
   templateUrl: './register.component.html',
-  imports: [
-    CommonModule,
-    FormsModule
-  ],
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.css'],
 })
-export class RegisterComponent implements OnInit {
-  formSubmitted: boolean = false;
-  signupUsers: any[] = [];
-
+export class RegisterComponent {
   signUpObjects: any = {
     userName: '',
     email: '',
@@ -24,31 +20,50 @@ export class RegisterComponent implements OnInit {
     password: '',
   };
 
-  ngOnInit() {
-    const storedUsers = localStorage.getItem('signupUsers');
-    if (storedUsers) {
-      this.signupUsers = JSON.parse(storedUsers);
-    }
-  }
+  formSubmitted: boolean = false;
+  errorMessage: string = ''; // To store error messages
+
+  constructor(private authService: AuthServiceService) {} // Inject AuthService
 
   onSignUp() {
     this.formSubmitted = true;
 
-    if (this.signUpObjects.userName && this.signUpObjects.email && this.signUpObjects.address &&
-      this.signUpObjects.telephone && this.signUpObjects.DateOfBirth && this.signUpObjects.password) {
+    if (
+      this.signUpObjects.userName &&
+      this.signUpObjects.email &&
+      this.signUpObjects.address &&
+      this.signUpObjects.telephone &&
+      this.signUpObjects.DateOfBirth &&
+      this.signUpObjects.password
+    ) {
 
-      this.signupUsers.push({...this.signUpObjects});
-      localStorage.setItem('signupUsers', JSON.stringify(this.signupUsers));
+      this.authService.register(this.signUpObjects).subscribe({
 
-      this.signUpObjects = {
-        userName: '',
-        email: '',
-        address: '',
-        telephone: '',
-        DateOfBirth: '',
-        password: '',
-      };
-      this.formSubmitted = false;
+        next: (response) => {
+          console.log('Registration successful', response);
+
+          this.signUpObjects = {
+            userName: '',
+            email: '',
+            address: '',
+            telephone: '',
+            DateOfBirth: '',
+            password: '',
+          };
+
+          this.formSubmitted = false;
+          this.errorMessage = '';
+        },
+        error: (err) => {
+          console.error('Registration failed:', err);
+          this.errorMessage = err.status === 404
+            ? 'Server not found. Please check the API URL.'
+            : 'Registration failed. Please try again.';
+        },
+      });
+    } else {
+      this.errorMessage = 'Please fill in all fields';
     }
   }
+
 }

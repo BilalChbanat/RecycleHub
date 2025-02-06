@@ -1,4 +1,5 @@
 <div class="h-screen md:flex">
+  <!-- Left Side -->
   <div class="relative overflow-hidden md:flex w-1/2 bg-gradient-to-tr from-green-700 to-green-300 justify-around items-center hidden">
     <div>
       <h1 class="text-white font-bold text-4xl font-sans">GoFinance</h1>
@@ -13,6 +14,7 @@
     <div class="absolute -top-20 -right-20 w-80 h-80 border-4 rounded-full border-opacity-30 border-t-8"></div>
   </div>
 
+  <!-- Right Side -->
   <div class="flex md:w-1/2 justify-center py-10 items-center bg-white">
     <form (ngSubmit)="onSignUp()" class="bg-white w-full px-6">
       <h1 class="text-gray-800 font-bold text-2xl mb-4">Create Account</h1>
@@ -22,7 +24,14 @@
         <!-- Username -->
         <div>
           <div class="flex items-center border-2 py-2 px-3 rounded-2xl">
-            <input [(ngModel)]="signUpObjects.userName" name="userName" class="pl-2 outline-none border-none w-full" type="text" placeholder="Username" required />
+            <input
+              [(ngModel)]="signUpObjects.userName"
+              name="userName"
+              class="pl-2 outline-none border-none w-full"
+              type="text"
+              placeholder="Username"
+              required
+            />
           </div>
           <span *ngIf="!signUpObjects.userName && formSubmitted" class="text-red-600 text-sm px-1">Username is required</span>
         </div>
@@ -30,7 +39,14 @@
         <!-- Email -->
         <div>
           <div class="flex items-center border-2 py-2 px-3 rounded-2xl">
-            <input [(ngModel)]="signUpObjects.email" name="email" class="pl-2 outline-none border-none w-full" type="email" placeholder="Email" required />
+            <input
+              [(ngModel)]="signUpObjects.email"
+              name="email"
+              class="pl-2 outline-none border-none w-full"
+              type="email"
+              placeholder="Email"
+              required
+            />
           </div>
           <span *ngIf="!signUpObjects.email && formSubmitted" class="text-red-600 text-sm px-1">Email is required</span>
         </div>
@@ -38,7 +54,14 @@
         <!-- Address -->
         <div>
           <div class="flex items-center border-2 py-2 px-3 rounded-2xl">
-            <input [(ngModel)]="signUpObjects.address" name="address" class="pl-2 outline-none border-none w-full" type="text" placeholder="Address" required />
+            <input
+              [(ngModel)]="signUpObjects.address"
+              name="address"
+              class="pl-2 outline-none border-none w-full"
+              type="text"
+              placeholder="Address"
+              required
+            />
           </div>
           <span *ngIf="!signUpObjects.address && formSubmitted" class="text-red-600 text-sm px-1">Address is required</span>
         </div>
@@ -46,7 +69,14 @@
         <!-- Telephone -->
         <div>
           <div class="flex items-center border-2 py-2 px-3 rounded-2xl">
-            <input [(ngModel)]="signUpObjects.telephone" name="telephone" class="pl-2 outline-none border-none w-full" type="tel" placeholder="Telephone" required />
+            <input
+              [(ngModel)]="signUpObjects.telephone"
+              name="telephone"
+              class="pl-2 outline-none border-none w-full"
+              type="tel"
+              placeholder="Telephone"
+              required
+            />
           </div>
           <span *ngIf="!signUpObjects.telephone && formSubmitted" class="text-red-600 text-sm px-1">Telephone is required</span>
         </div>
@@ -54,7 +84,13 @@
         <!-- Date of Birth -->
         <div>
           <div class="flex items-center border-2 py-2 px-3 rounded-2xl">
-            <input [(ngModel)]="signUpObjects.DateOfBirth" name="DateOfBirth" class="pl-2 outline-none border-none w-full" type="date" required />
+            <input
+              [(ngModel)]="signUpObjects.DateOfBirth"
+              name="DateOfBirth"
+              class="pl-2 outline-none border-none w-full"
+              type="date"
+              required
+            />
           </div>
           <span *ngIf="!signUpObjects.DateOfBirth && formSubmitted" class="text-red-600 text-sm px-1">Date of Birth is required</span>
         </div>
@@ -62,7 +98,14 @@
         <!-- Password -->
         <div>
           <div class="flex items-center border-2 py-2 px-3 rounded-2xl">
-            <input [(ngModel)]="signUpObjects.password" name="password" class="pl-2 outline-none border-none w-full" type="password" placeholder="Password" required />
+            <input
+              [(ngModel)]="signUpObjects.password"
+              name="password"
+              class="pl-2 outline-none border-none w-full"
+              type="password"
+              placeholder="Password"
+              required
+            />
           </div>
           <span *ngIf="!signUpObjects.password && formSubmitted" class="text-red-600 text-sm px-1">Password is required</span>
         </div>
