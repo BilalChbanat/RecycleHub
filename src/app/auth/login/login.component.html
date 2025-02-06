@@ -2,7 +2,8 @@
   <div class="min-h-screen flex flex-col items-center justify-center py-6 px-4">
     <div class="grid md:grid-cols-2 items-center gap-6 max-w-6xl w-full">
       <!-- Login Form -->
-      <div class="border border-gray-300 rounded-lg p-6 max-w-md shadow-[0_2px_22px_-4px_rgba(93,96,127,0.2)] max-md:mx-auto">
+      <div
+        class="border border-gray-300 rounded-lg p-6 max-w-md shadow-[0_2px_22px_-4px_rgba(93,96,127,0.2)] max-md:mx-auto">
         <form (ngSubmit)="onLogin()" class="space-y-4">
           <div class="mb-8">
             <h3 class="text-gray-800 text-3xl font-bold">Sign in</h3>
@@ -65,7 +66,12 @@
                 ></path>
               </svg>
             </div>
-            <span *ngIf="!loginObjects.password && loginFormSubmitted" class="text-red-600 pl-2">Password is required.</span>
+            <span *ngIf="!loginObjects.password && loginFormSubmitted"
+                  class="text-red-600 pl-2">Password is required.</span>
+          </div>
+          <!-- Add this in your login.component.html template -->
+          <div *ngIf="errorMessage" class="text-red-500 text-sm mt-2">
+            {{ errorMessage }}
           </div>
 
           <!-- Remember Me and Forgot Password -->
@@ -81,7 +87,8 @@
             </div>
 
             <div class="text-sm">
-              <a href="javascript:void(0);" class="text-blue-600 hover:underline font-semibold">Forgot your password?</a>
+              <a href="javascript:void(0);" class="text-blue-600 hover:underline font-semibold">Forgot your
+                password?</a>
             </div>
           </div>
 
@@ -98,7 +105,8 @@
           <!-- Register Link -->
           <p class="text-sm !mt-8 text-center text-gray-500">
             Don't have an account?
-            <a href="#" (click)="onSignUp()" class="text-blue-600 font-semibold hover:underline ml-1 whitespace-nowrap">Register here</a>
+            <a href="#" (click)="onSignUp()" class="text-blue-600 font-semibold hover:underline ml-1 whitespace-nowrap">Register
+              here</a>
           </p>
         </form>
       </div>

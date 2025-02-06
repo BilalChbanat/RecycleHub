@@ -17,6 +17,7 @@ export class RegisterComponent {
     address: '',
     telephone: '',
     DateOfBirth: '',
+    role: 'particulier',
     password: '',
   };
 
@@ -47,6 +48,7 @@ export class RegisterComponent {
             email: '',
             address: '',
             telephone: '',
+            role: 'particulier',
             DateOfBirth: '',
             password: '',
           };

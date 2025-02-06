@@ -23,31 +23,32 @@ export class AuthServiceService {
   }
 
   login(credentials: { email: string; password: string }): Observable<any> {
-    return this.http.get<any[]>(this.apiUrl).pipe(
+    return this.http.get<any[]>(
+      `${this.apiUrl}?email=${credentials.email}&password=${credentials.password}`
+    ).pipe(
       tap((users) => {
-        const user = users.find(u => u.email === credentials.email && u.password === credentials.password);
-        if (user) {
-          localStorage.setItem('user', JSON.stringify(user));
-          console.log('Login successful', user);
-          this.router.navigate(['/dashboard']);
+        if (users.length > 0) {
+          const user = users[0];
+          localStorage.setItem('currentUser', JSON.stringify(user));
+          this.router.navigate(['/']);
         } else {
-          console.error('Invalid credentials');
+          throw new Error('Invalid credentials');
         }
       })
     );
   }
 
   logout(): void {
-    localStorage.removeItem('user');
+    localStorage.removeItem('currentUser');
     this.router.navigate(['/login']);
   }
 
   isLoggedIn(): boolean {
-    return !!localStorage.getItem('user');
+    return !!localStorage.getItem('currentUser');
   }
 
   getCurrentUser(): any {
-    const user = localStorage.getItem('user');
+    const user = localStorage.getItem('currentUser');
     return user ? JSON.parse(user) : null;
   }
 }
