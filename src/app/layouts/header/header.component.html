@@ -13,6 +13,7 @@
       </div>
 
       <div class="flex items-center space-x-4">
+        <!-- Show Login and Sign Up if user is NOT logged in -->
         <a
           *ngIf="!authenticated()"
           href="/login"
@@ -28,13 +29,46 @@
           S'inscrire
         </a>
 
-        <a
-          *ngIf="authenticated()"
-          (click)="onLogout()"
-          class="cursor-pointer px-4 py-2 text-gray-600 hover:text-gray-700 transition-colors"
-        >
-          Déconnexion
-        </a>
+        <!-- Show User Dropdown if user is logged in -->
+        <div *ngIf="authenticated()" class="relative">
+          <!-- User Button -->
+          <button
+            (click)="toggleDropdown()"
+            class="flex items-center space-x-2 cursor-pointer focus:outline-none"
+          >
+            <img
+              [src]="currentUser?.photo || 'assets/default-user.png'"
+              alt="User Photo"
+              class="h-10 w-10 rounded-full object-cover"
+            />
+            <span class="text-gray-700">{{ currentUser?.userName }}</span>
+          </button>
+
+          <!-- Dropdown Menu -->
+          <div
+            *ngIf="showDropdown"
+            class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200"
+          >
+            <ul class="py-2">
+              <li>
+                <button
+                  (click)="onProfile()"
+                  class="w-full px-4 py-2 text-gray-700 hover:bg-gray-100 text-left"
+                >
+                  Profil
+                </button>
+              </li>
+              <li>
+                <button
+                  (click)="onLogout()"
+                  class="w-full px-4 py-2 text-gray-700 hover:bg-gray-100 text-left"
+                >
+                  Déconnexion
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   </nav>

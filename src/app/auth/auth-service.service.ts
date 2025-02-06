@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
-import { Observable, tap, switchMap } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Router} from '@angular/router';
+import {Observable, tap, switchMap} from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -9,13 +9,17 @@ import { Observable, tap, switchMap } from 'rxjs';
 export class AuthServiceService {
   private apiUrl = 'http://localhost:3000/users';
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router) {
+  }
 
   register(userData: any): Observable<any> {
     return this.http.post(this.apiUrl, userData).pipe(
       switchMap((response: any) => {
         console.log('Registration successful', response);
-        return this.login({ email: userData.email, password: userData.password }).pipe(
+        return this.login({
+          email: userData.email,
+          password: userData.password
+        }).pipe(
           tap(() => this.router.navigate(['/']))
         );
       })

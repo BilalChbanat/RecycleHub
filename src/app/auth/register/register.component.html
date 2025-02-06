@@ -1,10 +1,12 @@
 <div class="h-screen md:flex">
   <!-- Left Side -->
-  <div class="relative overflow-hidden md:flex w-1/2 bg-gradient-to-tr from-green-700 to-green-300 justify-around items-center hidden">
+  <div
+    class="relative overflow-hidden md:flex w-1/2 bg-gradient-to-tr from-green-700 to-green-300 justify-around items-center hidden">
     <div>
       <h1 class="text-white font-bold text-4xl font-sans">GoFinance</h1>
       <p class="text-white mt-1">The most popular peer-to-peer lending at SEA</p>
-      <a href="#" type="submit" class="flex w-28 text-center justify-center bg-white text-blue-700 mt-4 py-2 rounded-2xl font-bold mb-2">
+      <a href="#" type="submit"
+         class="flex w-28 text-center justify-center bg-white text-blue-700 mt-4 py-2 rounded-2xl font-bold mb-2">
         LOGIN
       </a>
     </div>
@@ -19,9 +21,28 @@
     <form (ngSubmit)="onSignUp()" class="bg-white w-full px-6">
       <h1 class="text-gray-800 font-bold text-2xl mb-4">Create Account</h1>
       <p class="text-sm font-normal text-gray-600 mb-7">Welcome to our platform</p>
-
+      <!-- Update the file input and image preview section -->
+      <div class="flex items-center space-x-6 mb-4">
+        <div class="shrink-0">
+          <img
+            [src]="previewImage || 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII='"
+            class="h-16 w-16 object-cover rounded-full"
+            alt="Current profile photo"/>
+        </div>
+        <label class="block">
+          <span class="sr-only">Choose profile photo</span>
+          <input type="file"
+                 (change)="onFileSelected($event)"
+                 accept="image/*"
+                 class="block w-full text-sm text-slate-500
+           file:mr-4 file:py-2 file:px-4
+           file:rounded-full file:border-0
+           file:text-sm file:font-semibold
+           file:bg-violet-50 file:text-violet-700
+           hover:file:bg-violet-100"/>
+        </label>
+      </div>
       <div class="grid grid-cols-2 gap-4">
-        <!-- Username -->
         <div>
           <div class="flex items-center border-2 py-2 px-3 rounded-2xl">
             <input
@@ -33,7 +54,8 @@
               required
             />
           </div>
-          <span *ngIf="!signUpObjects.userName && formSubmitted" class="text-red-600 text-sm px-1">Username is required</span>
+          <span *ngIf="!signUpObjects.userName && formSubmitted"
+                class="text-red-600 text-sm px-1">Username is required</span>
         </div>
 
         <!-- Email -->
@@ -63,7 +85,8 @@
               required
             />
           </div>
-          <span *ngIf="!signUpObjects.address && formSubmitted" class="text-red-600 text-sm px-1">Address is required</span>
+          <span *ngIf="!signUpObjects.address && formSubmitted"
+                class="text-red-600 text-sm px-1">Address is required</span>
         </div>
 
         <!-- Telephone -->
@@ -107,7 +130,8 @@
               required
             />
           </div>
-          <span *ngIf="!signUpObjects.password && formSubmitted" class="text-red-600 text-sm px-1">Password is required</span>
+          <span *ngIf="!signUpObjects.password && formSubmitted"
+                class="text-red-600 text-sm px-1">Password is required</span>
         </div>
       </div>
 
