@@ -3,6 +3,7 @@ import {LoginComponent} from './auth/login/login.component';
 import {HomeComponent} from './home/home.component';
 import {RegisterComponent} from './auth/register/register.component';
 import {ProfileComponent} from './auth/profile/profile.component';
+import {CollectionRequestComponent} from './collection-request/collection-request.component';
 
 export const routes: Routes = [
 
@@ -10,5 +11,6 @@ export const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: '', component: HomeComponent},
   { path: 'profile', component: ProfileComponent },
+  { path: 'collection-request', component: CollectionRequestComponent },
 
 ];

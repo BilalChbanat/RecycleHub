@@ -7,7 +7,7 @@ import {Observable, tap, switchMap} from 'rxjs';
   providedIn: 'root',
 })
 export class AuthServiceService {
-  private apiUrl = 'http://localhost:3000/users';
+  private apiUrl = 'http://localhost:3001/users';
 
   constructor(private http: HttpClient, private router: Router) {
   }
