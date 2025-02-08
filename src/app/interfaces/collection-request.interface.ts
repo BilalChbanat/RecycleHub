@@ -10,7 +10,7 @@ export interface CollectionRequest {
   date: string;
   time: string;
   notes: string;
-  status?: 'en attente' | 'occupée' | 'en cours' | 'validée' | 'rejetée';
+  status?: 'en attente' | 'occupee' | 'en cours' | 'validee' | 'rejetee';  // Removed accents
   totalWeight: number;
   createdAt?: string;
   userId?: string;

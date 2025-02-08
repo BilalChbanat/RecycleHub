@@ -1,51 +1,67 @@
 import { Component, OnInit } from '@angular/core';
-import { CollecteurService } from '../services/collecteur-service/collecteur.service';
-import {NgForOf, NgIf} from '@angular/common';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { CollectionRequest } from '../interfaces/collection-request.interface';
+import { CollectorActions } from './collector.actions';
+import {
+  selectFilteredRequests,
+  selectLoading,
+  selectError
+} from './collector.selectors';
+import { NgForOf, NgIf, AsyncPipe, NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-collecteur',
   templateUrl: './collecteur.component.html',
+  standalone: true,
   imports: [
     NgForOf,
-    NgIf
-  ],
-  styleUrls: ['./collecteur.component.css']
+    NgIf,
+    AsyncPipe,
+    NgClass
+  ]
 })
 export class CollecteurComponent implements OnInit {
-  requests: any[] = [];
+  requests$: Observable<CollectionRequest[]>;
+  loading$: Observable<boolean>;
+  error$: Observable<string | null>;
   userLocation: string = '';
 
-
-  constructor(private collecteurService: CollecteurService) {}
-
-  ngOnInit(): void {
+  constructor(private store: Store) {
     const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
     this.userLocation = currentUser.address;
 
-    this.collecteurService.getRequests().subscribe((requests) => {
-      this.requests = this.filterRequests(requests);
-    });
+    // Initialize the observables
+    this.requests$ = this.store.select(selectFilteredRequests(this.userLocation));
+    this.loading$ = this.store.select(selectLoading);
+    this.error$ = this.store.select(selectError);
+  }
+
+  readonly STATUS = {
+    EN_ATTENTE: 'en attente',
+    OCCUPEE: 'occupee',
+    EN_COURS: 'en cours',
+    VALIDEE: 'validee',
+    REJETEE: 'rejetee'
+  } as const;
+
+  ngOnInit(): void {
+    // Dispatch the load action when component initializes
+    this.store.dispatch(CollectorActions.loadRequests({ userLocation: this.userLocation }));
   }
 
   getWasteTypes(wastes: any): string[] {
     return Object.keys(wastes).filter(type => wastes[type].selected);
   }
 
-  filterRequests(requests: any[]): any[] {
-    return requests.filter(request =>
-      request.address.includes(this.userLocation) &&
-      request.status === 'en attente'
-    );
+  acceptRequest(request: CollectionRequest): void {
+    const updatedRequest = { ...request, status: this.STATUS.OCCUPEE };
+    this.store.dispatch(CollectorActions.updateRequestStatus({ request: updatedRequest }));
   }
 
-  acceptRequest(request: any): void {
-    request.status = 'acceptée';
-    this.collecteurService.updateRequest(request).subscribe();
-  }
 
-  rejectRequest(request: any): void {
-    request.status = 'rejetée';
-    this.collecteurService.updateRequest(request).subscribe();
+  rejectRequest(request: CollectionRequest): void {
+    const updatedRequest = { ...request, status: this.STATUS.REJETEE };
+    this.store.dispatch(CollectorActions.updateRequestStatus({ request: updatedRequest }));
   }
-
 }
