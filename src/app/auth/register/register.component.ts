@@ -19,7 +19,8 @@ export class RegisterComponent {
     DateOfBirth: '',
     role: 'particulier',
     password: '',
-    photo: ''
+    photo: '',
+    points: 0,
   };
 
   formSubmitted: boolean = false;

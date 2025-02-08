@@ -15,6 +15,7 @@ export class CollecteurComponent implements OnInit {
   requests: any[] = [];
   userLocation: string = '';
 
+
   constructor(private collecteurService: CollecteurService) {}
 
   ngOnInit(): void {
@@ -36,4 +37,15 @@ export class CollecteurComponent implements OnInit {
       request.status === 'en attente'
     );
   }
+
+  acceptRequest(request: any): void {
+    request.status = 'acceptée';
+    this.collecteurService.updateRequest(request).subscribe();
+  }
+
+  rejectRequest(request: any): void {
+    request.status = 'rejetée';
+    this.collecteurService.updateRequest(request).subscribe();
+  }
+
 }
