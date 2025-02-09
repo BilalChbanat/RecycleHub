@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { CollectionRequest } from '../interfaces/collection-request.interface';
-import { CollectorActions } from './collector.actions';
+import {Component, OnInit} from '@angular/core';
+import {Store} from '@ngrx/store';
+import {Observable} from 'rxjs';
+import {CollectionRequest, POINTS_PER_KG, WasteEntry} from '../interfaces/collection-request.interface';
+import {CollectorActions} from './collector.actions';
 import {
   selectFilteredRequests,
   selectLoading,
   selectError
 } from './collector.selectors';
-import { NgForOf, NgIf, AsyncPipe, NgClass } from '@angular/common';
+import {NgForOf, NgIf, AsyncPipe, NgClass} from '@angular/common';
 
 @Component({
   selector: 'app-collecteur',
@@ -31,7 +31,6 @@ export class CollecteurComponent implements OnInit {
     const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
     this.userLocation = currentUser.address;
 
-    // Initialize the observables
     this.requests$ = this.store.select(selectFilteredRequests(this.userLocation));
     this.loading$ = this.store.select(selectLoading);
     this.error$ = this.store.select(selectError);
@@ -46,8 +45,7 @@ export class CollecteurComponent implements OnInit {
   } as const;
 
   ngOnInit(): void {
-    // Dispatch the load action when component initializes
-    this.store.dispatch(CollectorActions.loadRequests({ userLocation: this.userLocation }));
+    this.store.dispatch(CollectorActions.loadRequests({userLocation: this.userLocation}));
   }
 
   getWasteTypes(wastes: any): string[] {
@@ -55,13 +53,42 @@ export class CollecteurComponent implements OnInit {
   }
 
   acceptRequest(request: CollectionRequest): void {
-    const updatedRequest = { ...request, status: this.STATUS.OCCUPEE };
-    this.store.dispatch(CollectorActions.updateRequestStatus({ request: updatedRequest }));
+    const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+    const updatedRequest = {
+      ...request,
+      status: this.STATUS.OCCUPEE,
+      collecteurId: currentUser.id
+    };
+    this.store.dispatch(CollectorActions.updateRequestStatus({request: updatedRequest}));
+  }
+
+  rejectRequest(request: CollectionRequest): void {
+    const updatedRequest = {
+      ...request,
+      status: this.STATUS.REJETEE
+    };
+    this.store.dispatch(CollectorActions.updateRequestStatus({request: updatedRequest}));
   }
 
 
-  rejectRequest(request: CollectionRequest): void {
-    const updatedRequest = { ...request, status: this.STATUS.REJETEE };
-    this.store.dispatch(CollectorActions.updateRequestStatus({ request: updatedRequest }));
+  calculatePoints(wastes: Record<string, WasteEntry>): number {
+    let totalPoints = 0;
+    for (const [type, entry] of Object.entries(wastes)) {
+      if (entry.selected && entry.weight) {
+        const pointsPerKg = POINTS_PER_KG[type as keyof typeof POINTS_PER_KG] || 0;
+        totalPoints += (entry.weight / 1000) * pointsPerKg; // Convert grams to kg
+      }
+    }
+    return totalPoints;
+  }
+
+  validateCollection(request: CollectionRequest): void {
+    const points = this.calculatePoints(request.wastes);
+    const updatedRequest = {
+      ...request,
+      status: this.STATUS.VALIDEE,
+      pointsAwarded: points
+    };
+    this.store.dispatch(CollectorActions.updateRequestStatus({request: updatedRequest}));
   }
 }

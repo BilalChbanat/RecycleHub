@@ -8,7 +8,7 @@ import {FormsModule} from '@angular/forms';
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css'],
-  standalone: true,  // If using standalone components
+  standalone: true,
   imports: [NgIf, FormsModule]
 })
 export class ProfileComponent implements OnInit {
@@ -24,7 +24,6 @@ export class ProfileComponent implements OnInit {
     if (!this.currentUser) {
       this.router.navigate(['/login']);
     }
-
 
   }
 

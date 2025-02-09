@@ -10,10 +10,13 @@ export interface CollectionRequest {
   date: string;
   time: string;
   notes: string;
-  status?: 'en attente' | 'occupee' | 'en cours' | 'validee' | 'rejetee';  // Removed accents
   totalWeight: number;
   createdAt?: string;
   userId?: string;
+  status?: 'en attente' | 'occupee' | 'en cours' | 'validee' | 'rejetee';
+  collecteurId?: string;
+  particulierId?: string;
+  pointsAwarded?: number;
 }
 
 export interface CollectionFormData {
@@ -23,3 +26,10 @@ export interface CollectionFormData {
   time: string;
   notes: string;
 }
+
+export const POINTS_PER_KG = {
+  plastique: 2,
+  verre: 1,
+  papier: 1,
+  metal: 5
+} as const;

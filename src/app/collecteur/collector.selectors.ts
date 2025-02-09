@@ -11,8 +11,7 @@ export const selectAllRequests = createSelector(
 export const selectFilteredRequests = (userLocation: string) => createSelector(
   selectAllRequests,
   (requests) => requests.filter(request =>
-    request.address.includes(userLocation) &&
-    request.status === 'en attente'
+    request.address.includes(userLocation)
   )
 );
 
