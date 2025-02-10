@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthServiceService} from '../../services/auth/auth-service.service';
 import {Router} from '@angular/router';
-import {NgIf} from '@angular/common';
+import {DatePipe, NgClass, NgIf, TitleCasePipe} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 
 @Component({
@@ -9,7 +9,7 @@ import {FormsModule} from '@angular/forms';
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css'],
   standalone: true,
-  imports: [NgIf, FormsModule]
+  imports: [NgIf, FormsModule, TitleCasePipe, NgClass, DatePipe]
 })
 export class ProfileComponent implements OnInit {
   currentUser: any = null;
@@ -68,4 +68,6 @@ export class ProfileComponent implements OnInit {
     this.authService.logout();
     this.router.navigate(['/login']);
   }
+
+  protected readonly console = console;
 }

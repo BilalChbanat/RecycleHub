@@ -14,7 +14,7 @@ export const routes: Routes = [
   {path: 'register', component: RegisterComponent, canActivate: [notLogedInGuard]},
   {path: 'login', component: LoginComponent, canActivate: [notLogedInGuard]},
   {path: '', component: HomeComponent},
-  { path: 'profile', component: ProfileComponent , canActivate: [notLogedInGuard] },
+  { path: 'profile', component: ProfileComponent , canActivate: [isLogedinGuard] },
   { path: 'collection-request', component: CollectionRequestComponent , canActivate: [isLogedinGuard]},
   { path: 'collection', component: CollecteurComponent , canActivate: [isLogedinGuard, collecteurGuard] },
 

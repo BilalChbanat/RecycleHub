@@ -21,6 +21,7 @@ export class RegisterComponent {
     password: '',
     photo: '',
     points: 0,
+    money: 0,
   };
 
   formSubmitted: boolean = false;
