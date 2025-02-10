@@ -6,7 +6,7 @@ export const isLogedinGuard: CanActivateFn = (route, state) => {
   const currentUser = localStorage.getItem('currentUser');
 
   if (currentUser) {
-    return true; 
+    return true;
   } else {
     router.navigate(['/login']);
     return false;

@@ -7,6 +7,7 @@ import {CollectionRequestComponent} from './collection-request/collection-reques
 import {CollecteurComponent} from './collecteur/collecteur.component';
 import {notLogedInGuard} from './guards/notLogedIn/not-loged-in.guard';
 import {isLogedinGuard} from './guards/isLogedin/is-logedin.guard';
+import {collecteurGuard} from './guards/collecteur/collecteur.guard';
 
 export const routes: Routes = [
 
@@ -15,6 +16,6 @@ export const routes: Routes = [
   {path: '', component: HomeComponent},
   { path: 'profile', component: ProfileComponent , canActivate: [notLogedInGuard] },
   { path: 'collection-request', component: CollectionRequestComponent , canActivate: [isLogedinGuard]},
-  { path: 'collection', component: CollecteurComponent , canActivate: [isLogedinGuard] },
+  { path: 'collection', component: CollecteurComponent , canActivate: [isLogedinGuard, collecteurGuard] },
 
 ];
