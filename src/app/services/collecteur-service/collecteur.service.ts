@@ -20,7 +20,6 @@ export class CollecteurService {
 
   updateRequest(request: CollectionRequest): Observable<CollectionRequest> {
     const url = `${this.apiUrl}/requests/${request.id}`;
-    console.log('Updating request at URL:', url, 'with data:', request);
 
     if (request.status === 'validee' && request.pointsAwarded && request.particulierId) {
       return forkJoin({

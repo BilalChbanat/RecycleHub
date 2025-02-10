@@ -1,19 +1,17 @@
 <header class="bg-white shadow-md fixed w-full top-0 z-50">
   <nav class="container mx-auto px-4 py-4">
     <div class="flex items-center justify-between">
-      <!-- Logo -->
       <div class="flex items-center">
         <a href="/" class="text-2xl font-bold text-emerald-600">RecycleHub</a>
       </div>
 
       <div class="hidden md:flex items-center space-x-8">
-        <a href="#services" class="text-gray-600 hover:text-emerald-600 transition-colors">Services</a>
+        <a href="/collection-request" class="text-gray-600 hover:text-emerald-600 transition-colors">Make Request</a>
         <a href="#impact" class="text-gray-600 hover:text-emerald-600 transition-colors">Impact</a>
         <a href="#testimonials" class="text-gray-600 hover:text-emerald-600 transition-colors">Témoignages</a>
       </div>
 
       <div class="flex items-center space-x-4">
-        <!-- Show Login and Sign Up if user is NOT logged in -->
         <a
           *ngIf="!authenticated()"
           href="/login"
